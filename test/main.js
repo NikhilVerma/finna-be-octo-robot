@@ -1,6 +1,6 @@
 'use strict';
 
-var finna_be_octo_robot = require('../lib/finna-be-octo-robot.js');
+var main = require('../js/main.js');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -30,7 +30,7 @@ exports['awesome'] = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(finna_be_octo_robot.awesome(), 'awesome', 'should be awesome.');
+    test.equal(main.awesome(), 'awesome', 'should be awesome.');
     test.done();
   }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
@@ -9,15 +9,32 @@ module.exports = function (grunt) {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
 
         // Task configuration.
-        concat: {
-            options: {
-                banner: '<%= banner %>',
-                stripBanners: true
-            },
-            dist: {
-                src: ['lib/**/*.js'],
-                dest: 'dist/main.js'
-            },
+        requirejs: {
+            compile: {
+                options: {
+                    name: "main",
+                    baseUrl: "js",
+                    out: "dist/js/main.js",
+                    include: [
+                        'require.js',
+                        'modernizr-2.6.2.min.js'
+                    ]
+                }
+            }
+        },
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    src: ['index.html'],
+                    dest: 'dist',
+                    filter: 'isFile'
+                }, {
+                    expand: true,
+                    src: ['js/**'],
+                    dest: 'dist/'
+                }]
+            }
         },
         uglify: {
             options: {
@@ -25,7 +42,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: '<%= concat.dist.dest %>',
-                dest: 'dist/<%= pkg.name %>.min.js'
+                dest: 'dist/main.min.js'
             },
         },
         nodeunit: {
@@ -40,9 +57,9 @@ module.exports = function (grunt) {
             },
             lib: {
                 options: {
-                    jshintrc: 'lib/.jshintrc'
+                    jshintrc: 'js/.jshintrc'
                 },
-                src: ['lib/**/*.js']
+                src: ['js/**/*.js']
             },
             test: {
                 src: ['test/**/*.js']
@@ -55,11 +72,12 @@ module.exports = function (grunt) {
             },
             lib: {
                 files: '<%= jshint.lib.src %>',
-                tasks: ['jshint:lib', 'nodeunit']
+                tasks: ['copy']
+                // tasks: ['jshint:lib', 'nodeunit']
             },
             test: {
                 files: '<%= jshint.test.src %>',
-                tasks: ['jshint:test', 'nodeunit']
+                // tasks: ['jshint:test', 'nodeunit']
             },
             css: {
                 files: 'css/*.less',
@@ -80,14 +98,15 @@ module.exports = function (grunt) {
     });
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'nodeunit', 'concat', 'uglify', 'less']);
+    grunt.registerTask('default', ['nodeunit', 'requirejs', 'less', 'copy']);
 
 };
