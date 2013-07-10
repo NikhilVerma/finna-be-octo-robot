@@ -1,4 +1,4 @@
-define("core/View", ['core/Class'], function(Class) {
+define("core/View", ['core/Class', 'core/Events', 'core/DOM'], function(Class, Events, DOM) {
 
     var View = O.View = O.Class.extend({
         parent_: null,
@@ -15,15 +15,15 @@ define("core/View", ['core/Class'], function(Class) {
             this.childViews_ = [];
 
             if (this.el === null) {
-                this.el = document.createElement(this.tagName);
-                this.el.className = this.className;
+                this.el = DOM.create(this.tagName,{
+                    className: this.className
+                });
             }
         },
 
-        draw: function() {
-        },
+        draw: function() {},
 
-        update: function(data) {},
+        update: function() {},
 
         insertView: function(view) {
             this.el.appendChild(view.el);
@@ -33,6 +33,8 @@ define("core/View", ['core/Class'], function(Class) {
             view.draw();
         }
     });
+
+    _.extend(View.prototype, Events);
 
     return View;
 

@@ -4,7 +4,7 @@
  */
 window.O = {};
 
-require(["core/View", "glues/app"], function(_, app) {
+require(["glues/app", "core/DOM", "core/View", "underscore", "modernizr"], function(app) {
 
     app.start();
 

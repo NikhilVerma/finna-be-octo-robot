@@ -17,7 +17,8 @@ module.exports = function(grunt) {
                     out: "dist/js/main.js",
                     include: [
                         'require.js',
-                        'modernizr-2.6.2.min.js'
+                        'modernizr-2.6.2.min.js',
+                        'underscore.js',
                     ]
                 }
             }

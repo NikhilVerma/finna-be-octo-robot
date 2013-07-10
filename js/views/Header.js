@@ -12,15 +12,14 @@ define("views/Header", function() {
                 this.title = props.title;
             }
 
-            this._super.init.apply(this, arguments);
+            this._super.apply(this, arguments);
         },
 
         draw: function(){
             if (this.title) {
-                var a = document.createElement('h1');
-                a.textContent = this.title;
-
-                this.el.appendChild(a);
+                this.el.appendChild(O.DOM.create('h1', {
+                    text: this.title
+                }));
             }
         }
     });
