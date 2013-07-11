@@ -1,6 +1,59 @@
 @import "normalize.less";
+@import "globals.less";
 @import "mixins.less";
 
-a {
-    display: block;
+body {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+header {
+
+}
+
+.flight-search {
+    .box-sizing(border-box);
+    padding: @default-padding;
+    width: 100%;
+    background: #eee;
+
+    .tabs {
+        display: block;
+        overflow: hidden;
+
+        span {
+            float: left;
+            margin: @default-padding 0;
+            width: 50%;
+            text-align: center;
+        }
+    }
+
+    .search-settings {
+        overflow: hidden;
+
+        input[type=text] {
+            width: 45%;
+            float: left;
+            margin: @default-padding;
+
+            + input[type=text] {
+                float: right;
+            }
+        }
+
+        input[type=date] {
+            width: 45%;
+            float: left;
+            margin: @default-padding;
+
+            + input[type=date] {
+                float: right;
+            }
+        }
+
+        select {
+            width: 100%;
+        }
+    }
 }

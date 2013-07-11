@@ -4,8 +4,12 @@
  */
 window.O = {};
 
-require(["glues/app", "core/DOM", "core/View", "underscore", "modernizr"], function(app) {
+require(["core/DOM"], function (_) {
 
-    app.start();
+    require(["glues/app"], function (app) {
 
+        app.start();
+
+    });
 });
+

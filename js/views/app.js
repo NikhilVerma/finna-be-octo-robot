@@ -1,9 +1,11 @@
 define("views/app", [
     "views/Header",
-    "views/FlightResultView"
-], function (HeaderView, FlightResultView) {
+    "views/FlightResult",
+    "views/FlightSearch",
+    "models/FlightSearch"
+], function (HeaderView, ResultView, SearchView, SearchModel) {
 
-    var View = O.View.extend({
+    var View = Backbone.View.extend({
         className: 'app',
 
         flightView_: null,
@@ -11,13 +13,19 @@ define("views/app", [
         update: function (body) {
             body.appendChild(this.el);
 
-            this.insertView(new HeaderView({
-                title: 'Octoflights Search Engine'
-            }));
+            this.$el.append(new HeaderView({
+                title: 'Minimalistic Flight Search'
+            }).render().el);
 
-            this.insertView(this.flightView_ = new FlightResultView());
+            this.searchView_ = new SearchView({
+                model: new SearchModel()
+            });
+            this.$el.append(this.searchView_.render().el);
 
-            this.flightView_.update({
+            this.resultView_ = new ResultView();
+            this.$el.append(this.resultView_.render().el);
+
+            this.resultView_.update({
                 id: 1,
                 price: 9000,
                 currency: 'INR',
@@ -36,6 +44,8 @@ define("views/app", [
                     arrival: new Date().getTime()
                 }
             });
+
+
         }
     });
 

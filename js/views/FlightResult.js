@@ -1,11 +1,19 @@
-define("views/FlightResultView", function () {
+define("views/FlightResult", function () {
 
     var create = O.DOM.create;
 
-    var FlightResultView = O.View.extend({
+    var FlightResultView = Backbone.View.extend({
         className: 'flight-result',
 
-        draw: function () {
+        events: {
+            'click button': 'book'
+        },
+
+        book: function () {
+            debugger;
+        },
+
+        render: function () {
             this.el.appendChild(create('div', {
                 content: [
                     this.price_ = create('span', {
@@ -51,6 +59,8 @@ define("views/FlightResultView", function () {
                     })
                 ]
             }));
+
+            return this;
         },
 
         update: function (data) {

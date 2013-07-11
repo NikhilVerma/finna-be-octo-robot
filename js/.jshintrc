@@ -115,6 +115,7 @@
         "O",
         "console",
         "define",
-        "require"
+        "require",
+        "Backbone"
     ]
 }
