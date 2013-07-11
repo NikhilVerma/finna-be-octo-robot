@@ -5,55 +5,96 @@
 body {
     max-width: 700px;
     margin: 0 auto;
+    background: @background-color;
+    color: #222;
 }
 
-header {
+@base-header-dist: 1.2px;
 
+header {
+    .bold-font;
+    text-align: center;
+    color: #fff;
+    font-size: 2em;
+    text-shadow: 0 @base-header-dist      darken(@background-color, 10),
+                 0 @base-header-dist * 2  darken(@background-color, 5),
+                 0 @base-header-dist * 3  darken(@background-color, 10),
+                 0 @base-header-dist * 4  darken(@background-color, 12),
+                 0 @base-header-dist * 5  darken(@background-color, 16),
+                 0 0 10px darken(@background-color, 5),
+                 0 0 15px darken(@background-color, 5);
+}
+
+h1 {
+    margin: @default-padding;
+}
+
+input[type=text] {
+    border: 0;
+    line-height: 2em;
+    height: 2em;
+    padding: 0 0.5em;
+    .box-sizing(border-box);
+    .box-shadow(0 0 2px 1px #ddd);
+}
+
+
+.city-search {
+    margin: 0 0 @default-padding 0;
+    position: relative;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    li {
+        list-style: none;
+        padding: 0.5em;
+        border-bottom: 1px solid @lighter-border-color;
+
+        &:hover {
+            background: @background-dark;
+        }
+    }
+
+    .user-message {
+        .bold-font;
+        font-size: 0.8em;
+        line-height: 1em;
+        .transition(height 250ms ease-in-out);
+        display: block;
+        height: 0;
+        overflow: hidden;
+        color: @medium-text-color;
+        text-align: right;
+        color: @base-green;
+
+        &.show {
+            height: 1em;
+            padding-top: @default-padding;
+            padding-right: @default-padding;
+        }
+    }
+
+    input {
+        width: 100%
+    }
 }
 
 .flight-search {
     .box-sizing(border-box);
     padding: @default-padding;
     width: 100%;
-    background: #eee;
 
-    .tabs {
-        display: block;
-        overflow: hidden;
+    input[type=date] {
+        width: 45%;
+        float: left;
+        margin: @default-padding;
 
-        span {
-            float: left;
-            margin: @default-padding 0;
-            width: 50%;
-            text-align: center;
-        }
-    }
-
-    .search-settings {
-        overflow: hidden;
-
-        input[type=text] {
-            width: 45%;
-            float: left;
-            margin: @default-padding;
-
-            + input[type=text] {
-                float: right;
-            }
-        }
-
-        input[type=date] {
-            width: 45%;
-            float: left;
-            margin: @default-padding;
-
-            + input[type=date] {
-                float: right;
-            }
-        }
-
-        select {
-            width: 100%;
+        + input[type=date] {
+            float: right;
         }
     }
 }

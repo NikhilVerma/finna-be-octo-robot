@@ -14,7 +14,7 @@ define("views/app", [
             body.appendChild(this.el);
 
             this.$el.append(new HeaderView({
-                title: 'Minimalistic Flight Search'
+                title: 'You want to travel'
             }).render().el);
 
             this.searchView_ = new SearchView({

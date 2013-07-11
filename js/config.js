@@ -31,7 +31,7 @@ require.config({
     }, {
         "name": "lodash",
         "location": "/js/",
-        "main": "lodash.backbone.js"
+        "main": "lodash.js"
     }],
 
     "shim": {

@@ -9,20 +9,20 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
 
         // Task configuration.
-        requirejs: {
-            compile: {
-                options: {
-                    name: "main",
-                    baseUrl: "js",
-                    out: "dist/js/main.js",
-                    include: [
-                        'require.js',
-                        'modernizr-2.6.2.min.js',
-                        'underscore.js',
-                    ]
-                }
-            }
-        },
+        // requirejs: {
+        //     compile: {
+        //         options: {
+        //             name: "main",
+        //             baseUrl: "js",
+        //             out: "dist/js/main.js",
+        //             include: [
+        //                 'require.js',
+        //                 'modernizr-2.6.2.min.js',
+        //                 'underscore.js',
+        //             ]
+        //         }
+        //     }
+        // },
         copy: {
             main: {
                 files: [{
@@ -108,6 +108,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Default task.
-    grunt.registerTask('default', ['nodeunit', 'requirejs', 'less', 'copy']);
+    grunt.registerTask('default', ['less', 'copy']);
 
 };

@@ -1,8 +1,8 @@
-define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
+define("views/MoneySelect", function () {
 
     var create = O.DOM.create;
 
-    var CitySearch = Backbone.View.extend({
+    var MoneySelect = Backbone.View.extend({
         className: 'city-search',
 
         autocomplete_: null,
@@ -13,10 +13,6 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
             'focus input': 'onFocus',
             'blur input': 'onBlur',
             'click li': 'select'
-        },
-
-        initialize: function () {
-            this.model = new CitySearchModel();
         },
 
         render: function () {
@@ -77,6 +73,6 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
         }
     });
 
-    return CitySearch;
+    return MoneySelect;
 
 });

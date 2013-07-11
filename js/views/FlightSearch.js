@@ -1,67 +1,59 @@
-define("views/FlightSearch", ['views/CitySearch'], function (CitySearch) {
+define("views/FlightSearch", [
+        'views/CitySearch',
+        'views/DateSelect',
+        'views/PeopleSelect',
+        'views/MoneySelect'
+    ], function (CitySearch, DateSelect, PeopleSelect, MoneySelect) {
 
-    var create = O.DOM.create;
+        var create = O.DOM.create;
 
-    var FlightSearchView = Backbone.View.extend({
-        className: 'flight-search',
-        tagName: 'form',
+        var FlightSearchView = Backbone.View.extend({
+            className: 'flight-search',
+            tagName: 'form',
 
-        render: function () {
-            this.$el.append(this.tabs_ = create('div', {
-                    className: 'tabs',
-                    content: [
-                        create('span', {
-                            className: 'going-way',
-                            text: 'One Way'
-                        }),
-                        create('span', {
-                            className: 'return-way',
-                            text: 'Return Way'
-                        })
-                    ]
-                }),
+            render: function () {
+                this.$el.append(
+                    new CitySearch({
+                        klassName: 'going-city',
+                        placeholder: 'So, where do you want to fly from?',
+                        message: 'That\'s a charming place'
+                    }).render().el,
 
-                create('div', {
-                    className: 'search-settings',
-                    content: [
-                        new CitySearch({
-                            klassName: 'going-city',
-                            placeholder: 'Enter origin city'
-                        }).render().el,
+                    new CitySearch({
+                        klassName: 'return-city',
+                        placeholder: 'And where do you wish to go?',
+                        message: 'I\'ve heard the weather is lovely there!'
+                    }).render().el,
 
-                        new CitySearch({
-                            klassName: 'return-city',
-                            placeholder: 'Enter destination city'
-                        }).render().el,
+                    new DateSelect({
+                        klassName: 'going-date',
+                        placeholder: 'When would you like to fly?',
+                        message: 'That\'s a good day to be travelling'
+                    }).render().el,
 
-                        create('input', {
-                            type: 'date',
-                            className: 'going-date'
-                        }),
+                    new DateSelect({
+                        klassName: 'return-date',
+                        placeholder: 'Do you want to come back?',
+                        message: 'Aaaand we\'re back'
+                    }).render().el,
 
-                        create('input', {
-                            type: 'date',
-                            className: 'return-date'
-                        }),
+                    new PeopleSelect({
+                        placeholder: 'How many people be travelling with ya?'
+                    }).render().el,
 
-                        create('select')
-                    ]
-                }),
-
-                create('div', {
-                    content: 'Slider resides here'
-
-                })
+                    new MoneySelect({
+                        placeholder: 'How tight is your wallet?'
+                    }).render().el
             );
 
-            return this;
-        },
+        return this;
+    },
 
-        update: function (data) {
+    update: function (data) {
 
-        }
-    });
+    }
+});
 
-    return FlightSearchView;
+return FlightSearchView;
 
 });
