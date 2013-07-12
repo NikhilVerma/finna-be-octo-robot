@@ -34,6 +34,10 @@ module.exports = function(grunt) {
                     expand: true,
                     src: ['js/**'],
                     dest: 'dist/'
+                }, {
+                    expand: true,
+                    src: ['img/**'],
+                    dest: 'dist/'
                 }]
             }
         },
@@ -83,6 +87,10 @@ module.exports = function(grunt) {
             css: {
                 files: 'css/*.less',
                 tasks: ['less']
+            },
+            img: {
+                files: 'img/**',
+                tasks: ['copy']
             },
         },
         less: {

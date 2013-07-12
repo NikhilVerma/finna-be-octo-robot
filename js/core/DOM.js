@@ -1,4 +1,4 @@
-define("core/DOM", ['core/Class','lodash'], function (Class, _) {
+define("core/DOM", function () {
 
         var DOM = O.DOM = {
             /**

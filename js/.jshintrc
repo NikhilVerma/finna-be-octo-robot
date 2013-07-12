@@ -116,6 +116,8 @@
         "console",
         "define",
         "require",
-        "Backbone"
+        "Backbone",
+        "moment",
+        "Kalendae"
     ]
 }

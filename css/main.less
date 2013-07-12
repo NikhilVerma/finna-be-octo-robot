@@ -1,45 +1,13 @@
 @import "normalize.less";
 @import "globals.less";
 @import "mixins.less";
-
-body {
-    max-width: 700px;
-    margin: 0 auto;
-    background: @background-color;
-    color: #222;
-}
-
-@base-header-dist: 1.2px;
-
-header {
-    .bold-font;
-    text-align: center;
-    color: #fff;
-    font-size: 2em;
-    text-shadow: 0 @base-header-dist      darken(@background-color, 10),
-                 0 @base-header-dist * 2  darken(@background-color, 5),
-                 0 @base-header-dist * 3  darken(@background-color, 10),
-                 0 @base-header-dist * 4  darken(@background-color, 12),
-                 0 @base-header-dist * 5  darken(@background-color, 16),
-                 0 0 10px darken(@background-color, 5),
-                 0 0 15px darken(@background-color, 5);
-}
-
-h1 {
-    margin: @default-padding;
-}
-
-input[type=text] {
-    border: 0;
-    line-height: 2em;
-    height: 2em;
-    padding: 0 0.5em;
-    .box-sizing(border-box);
-    .box-shadow(0 0 2px 1px #ddd);
-}
+@import "flight-result.less";
+@import "people-select.less";
+@import "kalendae.less";
 
 
 .city-search {
+    font-size: 80%;
     margin: 0 0 @default-padding 0;
     position: relative;
 
@@ -47,6 +15,11 @@ input[type=text] {
         margin: 0;
         padding: 0;
         background: white;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1;
     }
 
     li {
@@ -74,27 +47,33 @@ input[type=text] {
         &.show {
             height: 1em;
             padding-top: @default-padding;
-            padding-right: @default-padding;
         }
     }
 
     input {
-        width: 100%
+        width: 100%;
+        .box-sizing(border-box);
     }
 }
 
 .flight-search {
     .box-sizing(border-box);
-    padding: @default-padding;
+    padding: @default-padding 0;
     width: 100%;
 
-    input[type=date] {
-        width: 45%;
-        float: left;
-        margin: @default-padding;
+    .city-search {
+        width: 48%;
+        margin-left: 1%;
+        margin-right: 1%;
+        display: inline-block;
+        vertical-align: top;
+    }
+}
 
-        + input[type=date] {
-            float: right;
-        }
+.date-select {
+    text-align: center;
+
+    .kalendae {
+
     }
 }

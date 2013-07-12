@@ -1,9 +1,9 @@
 define("views/app", [
     "views/Header",
-    "views/FlightResult",
+    "views/ResultList",
     "views/FlightSearch",
     "models/FlightSearch"
-], function (HeaderView, ResultView, SearchView, SearchModel) {
+], function (HeaderView, ResultListView, SearchView, SearchModel) {
 
     var View = Backbone.View.extend({
         className: 'app',
@@ -11,41 +11,28 @@ define("views/app", [
         flightView_: null,
 
         update: function (body) {
-            body.appendChild(this.el);
 
+            // Header view
             this.$el.append(new HeaderView({
-                title: 'You want to travel'
+                title: 'Let\'s Travel!'
             }).render().el);
 
+            // Flight search view
             this.searchView_ = new SearchView({
                 model: new SearchModel()
-            });
-            this.$el.append(this.searchView_.render().el);
+            }).render();
+            this.$el.append(this.searchView_.el);
+            this.listenTo(this.searchView_, 'didSearch', this.renderResults_);
 
-            this.resultView_ = new ResultView();
-            this.$el.append(this.resultView_.render().el);
+            // Flight results view
+            this.resultsView_ = new ResultListView();
+            this.$el.append(this.resultsView_.el);
 
-            this.resultView_.update({
-                id: 1,
-                price: 9000,
-                currency: 'INR',
-                departureCity: 'PNQ',
-                arrivalCity: 'DEL',
+            body.appendChild(this.el);
+        },
 
-                goingWay: {
-                    flight: 'IA-109',
-                    departure: new Date().getTime(),
-                    arrival: new Date().getTime()
-                },
-
-                returnWay: {
-                    flight: 'IA-109',
-                    departure: new Date().getTime(),
-                    arrival: new Date().getTime()
-                }
-            });
-
-
+        renderResults_: function(results) {
+            this.resultsView_.update(results);
         }
     });
 

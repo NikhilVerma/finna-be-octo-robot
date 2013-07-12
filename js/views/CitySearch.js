@@ -39,7 +39,7 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
 
         search: _.throttle(function (e) {
 
-            this.model.fetch(this.textInput_.value, _.bind(function (cities) {
+            this.model.get(this.textInput_.value, _.bind(function (cities) {
 
                 if (cities && cities.length > 0) {
 

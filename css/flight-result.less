@@ -1,0 +1,71 @@
+.flight-result {
+    padding: @default-padding;
+    margin: @default-padding;
+    background: white;
+    overflow: hidden;
+    position: relative;
+    .box-shadow(0 2px 2px #ccc, 0 0 10px #ddd);
+
+    &.return {
+        .going, .return {
+            display: block;
+            width: 50%;
+            float: left;
+        }
+    }
+
+    .going, .return {
+        width: 100%;
+    }
+
+    .return {
+        display: none;
+    }
+
+    .price {
+        display: block;
+        .bold-font;
+        font-size: 2em;
+        line-height: 1em;
+        position: relative;
+        margin-bottom: @default-padding;
+
+        em {
+
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+    }
+
+    .flight, .connection {
+        display: inline-block;
+        color: @medium-text-color;
+        font-size: 0.8em;
+        margin-right: 1em;
+    }
+
+    .connection {
+        font-size: 1em;
+    }
+
+    .depart, .arrive {
+        display: block;
+        .bold-font;
+    }
+
+    .arrive {
+        display: block;
+    }
+
+    .gap {
+        .bold-font;
+        color: @medium-text-color;
+        display: block;
+        font-size: 0.7em;
+    }
+}

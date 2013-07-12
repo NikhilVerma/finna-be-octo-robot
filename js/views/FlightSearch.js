@@ -1,59 +1,107 @@
 define("views/FlightSearch", [
-        'views/CitySearch',
-        'views/DateSelect',
-        'views/PeopleSelect',
-        'views/MoneySelect'
-    ], function (CitySearch, DateSelect, PeopleSelect, MoneySelect) {
+    'views/CitySearch',
+    'views/DateSelect',
+    'views/PeopleSelect',
+    'views/MoneySelect'
+], function (CitySearch, DateSelect, PeopleSelect, MoneySelect) {
 
-        var create = O.DOM.create;
+    var create = O.DOM.create;
 
-        var FlightSearchView = Backbone.View.extend({
-            className: 'flight-search',
-            tagName: 'form',
+    var FlightSearchView = Backbone.View.extend({
+        className: 'flight-search',
 
-            render: function () {
-                this.$el.append(
-                    new CitySearch({
-                        klassName: 'going-city',
-                        placeholder: 'So, where do you want to fly from?',
-                        message: 'That\'s a charming place'
-                    }).render().el,
+        tagName: 'form',
 
-                    new CitySearch({
-                        klassName: 'return-city',
-                        placeholder: 'And where do you wish to go?',
-                        message: 'I\'ve heard the weather is lovely there!'
-                    }).render().el,
+        initialize: function () {
+            this.departCity_ = new CitySearch({
+                klassName: 'depart-city',
+                placeholder: 'So, where do you want to fly from?',
+                message: 'That\'s a charming place'
+            });
+            this.listenTo(this.departCity_, 'change', this.handleDepartChange_);
 
-                    new DateSelect({
-                        klassName: 'going-date',
-                        placeholder: 'When would you like to fly?',
-                        message: 'That\'s a good day to be travelling'
-                    }).render().el,
+            this.arriveCity_ = new CitySearch({
+                klassName: 'arrive-city',
+                placeholder: 'And where do you wish to go?',
+                message: 'I\'ve heard the weather is lovely there!'
+            });
+            this.listenTo(this.arriveCity_, 'change', this.handleArriveChange_);
 
-                    new DateSelect({
-                        klassName: 'return-date',
-                        placeholder: 'Do you want to come back?',
-                        message: 'Aaaand we\'re back'
-                    }).render().el,
+            this.dateSelect_ = new DateSelect({
+                placeholder: 'When would you like to fly? If you wish to come back, select that date as well.'
+            });
+            this.listenTo(this.dateSelect_, 'change', this.handleDateChange_);
 
-                    new PeopleSelect({
-                        placeholder: 'How many people be travelling with ya?'
-                    }).render().el,
+            this.peopleSelect_ = new PeopleSelect({
+                placeholder: 'How many people are travelling?',
+                max: 10,
+                min: 1
+            });
+            this.listenTo(this.peopleSelect_, 'change', this.handlePeopleChange_);
 
-                    new MoneySelect({
-                        placeholder: 'How tight is your wallet?'
-                    }).render().el
+
+            _.bindAll(this, 'handleSearchResponse_');
+        },
+
+        render: function () {
+            this.$el.append(
+                this.departCity_.render().el,
+                this.arriveCity_.render().el,
+                this.dateSelect_.render().el,
+                this.peopleSelect_.render().el,
+
+                new MoneySelect({
+                    placeholder: 'How tight is your wallet?'
+                }).render().el
             );
 
-        return this;
-    },
+            return this;
+        },
 
-    update: function (data) {
+        handleArriveChange_: function (arrive) {
+            this.arrivingCity_ = arrive;
+            this.doSearch_();
+        },
 
-    }
-});
+        handleDepartChange_: function (depart) {
+            this.departingCity_ = depart;
+            this.doSearch_();
+        },
 
-return FlightSearchView;
+        handlePeopleChange_: function (people) {
+            this.numPassengers_ = Math.min(1, people);
+            this.doSearch_();
+        },
+
+        handleDateChange_: function(dates) {
+            this.departDate_ = dates[0];
+            this.returnDate_ = null;
+
+            if (dates.length > 1) {
+                this.returnDate_ = dates[1];
+            }
+
+            this.doSearch_();
+        },
+
+        doSearch_: function () {
+            if (this.departingCity_ && this.arrivingCity_ && this.departDate_) {
+
+                this.model.get({
+                    depart: this.departingCity_,
+                    arrive: this.arrivingCity_,
+                    departDate: this.departDate_,
+                    returnDate: this.returnDate_
+                }, this.handleSearchResponse_);
+
+            }
+        },
+
+        handleSearchResponse_: function (response) {
+            this.trigger('didSearch', response);
+        }
+    });
+
+    return FlightSearchView;
 
 });

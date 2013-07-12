@@ -3,73 +3,36 @@ define("views/DateSelect", function () {
     var create = O.DOM.create;
 
     var DateSelect = Backbone.View.extend({
-        className: 'city-search',
+        className: 'date-select',
 
         autocomplete_: null,
+
         lastValue_: '',
 
-        events: {
-            'keyup input': 'search',
-            'focus input': 'onFocus',
-            'blur input': 'onBlur',
-            'click li': 'select'
-        },
-
         render: function () {
-            this.$el.append(this.textInput_ = create('input', {
-                    type: 'text',
-                    className: this.options.klassName,
-                    placeholder: this.options.placeholder
-                }),
 
-                this.autocomplete_ = create('ul', {
-                    className: 'autocomplete'
-                }),
+            var that = this;
 
-                this.userMessage_ = create('span', {
-                    className: 'user-message'
-                }));
+            this.$el.append(create('span',{
+                className: 'placeholder',
+                content: this.options.placeholder
+            }));
 
-            return this;
-        },
-
-        search: _.throttle(function (e) {
-
-            this.model.fetch(this.textInput_.value, _.bind(function (cities) {
-
-                if (cities && cities.length > 0) {
-
-                    this.autocomplete_.innerHTML = cities.map(function (city) {
-                        return '<li data-id="' + city.id + '">' + city.name + '</li>';
-                    }, this).join('');
-
+            this.kalendae_ = new Kalendae({
+                attachTo: this.el,
+                months: 2,
+                mode: 'range',
+                direction: 'today-future',
+                useYearNav: false,
+                selected: [Kalendae.moment()],
+                subscribe: {
+                    change: function (date, action) {
+                        that.trigger('change', this.getSelectedRaw());
+                    }
                 }
-
-            }, this));
-
-        }, 100),
-
-        onFocus: function(){
-            this.textInput_.value = '';
-        },
-
-        onBlur: function(){
-            this.textInput_.value = this.lastValue_;
-        },
-
-        select: function (e) {
-            var el = e.target;
-
-            this.lastValue_ = this.textInput_.value = el.textContent;
-
-            this.trigger('change', {
-                id: el.getAttribute('data-id'),
-                name: el.textContent
             });
 
-            $(this.userMessage_).text(this.options.message).addClass('show');
-
-            this.autocomplete_.innerHTML = '';
+            return this;
         }
     });
 
