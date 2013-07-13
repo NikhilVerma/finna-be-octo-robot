@@ -10,15 +10,18 @@ define("views/FlightResult", function () {
         },
 
         doBooking_: function () {
+            window.alert('That\'s all folks');
         },
 
         render: function () {
             this.$el.append(
+                // Price of the flight
                 create('span', {
                     className: 'price',
                     content: [
                         this.price_ = create('span'),
 
+                        // Booking button
                         this.book_ = create('button', {
                             className: 'book green-button',
                             text: 'Book this flight'
@@ -26,6 +29,7 @@ define("views/FlightResult", function () {
                     ]
                 }),
 
+                // Going journey
                 this.going_ = create('div', {
                     className: 'going',
                     content: [
@@ -47,6 +51,8 @@ define("views/FlightResult", function () {
                     ]
                 }),
 
+
+                // Return journey
                 this.return_ = create('div', {
                     className: 'return',
                     content: [
@@ -72,6 +78,10 @@ define("views/FlightResult", function () {
             return this;
         },
 
+        /**
+         * Takes the flight search data and updates itself
+         * @param  {Object} data
+         */
         update: function (data) {
             this.price_.innerHTML = '<strong>' + data.currency + '</strong> ' + data.price;
 

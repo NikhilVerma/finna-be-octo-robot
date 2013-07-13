@@ -1,13 +1,13 @@
+/**
+ * Date select view, uses the Kalendae library to render a ranged date picker
+ */
+
 define("views/DateSelect", function () {
 
     var create = O.DOM.create;
 
     var DateSelect = Backbone.View.extend({
         className: 'date-select',
-
-        autocomplete_: null,
-
-        lastValue_: '',
 
         render: function () {
 

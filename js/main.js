@@ -6,9 +6,9 @@ window.O = {};
 
 require(["core/DOM"], function (_) {
 
-    require(["glues/app"], function (app) {
+    require(["views/app"], function (appView) {
 
-        app.start();
+        appView.update(document.body);
 
     });
 });

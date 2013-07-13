@@ -12,24 +12,42 @@ define("views/PeopleSelect", function () {
         render: function () {
 
             this.$el.append(create('span', {
-                className: 'placeholder',
-                text: this.options.placeholder
-            }), create('i', {
-                className: 'decrement',
-                text: '-'
-            }), create('input', {
-                type: 'text',
-                value: '1'
-            }), create('i', {
-                className: 'increment',
-                text: '+'
-            }));
+                    className: 'placeholder',
+                    text: this.options.placeholder
+                }),
+
+                create('i', {
+                    className: 'decrement',
+                    text: '-'
+                }),
+
+                this.textInput_ = create('input', {
+                    type: 'text',
+                    value: '1'
+                }),
+
+                create('i', {
+                    className: 'increment',
+                    text: '+'
+                })
+            );
 
             return this;
         },
 
-        updatePeople_: function() {
+        updatePeople_: function (e) {
+            var el = e.target;
+            var val = parseInt(this.textInput_.value, 10);
 
+            if (el.className === 'increment') {
+                val = Math.min(this.options.max, val + 1);
+            } else {
+                val = Math.max(this.options.min, val - 1);
+            }
+
+            this.textInput_.value = val;
+
+            this.trigger('change', val);
         }
     });
 

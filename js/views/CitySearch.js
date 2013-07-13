@@ -5,7 +5,6 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
     var CitySearch = Backbone.View.extend({
         className: 'city-search',
 
-        autocomplete_: null,
         lastValue_: '',
 
         events: {
@@ -15,12 +14,14 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
             'click li': 'select'
         },
 
+        // Self initialize own model
         initialize: function () {
             this.model = new CitySearchModel();
         },
 
         render: function () {
-            this.$el.append(this.textInput_ = create('input', {
+            this.$el.append(
+                this.textInput_ = create('input', {
                     type: 'text',
                     className: this.options.klassName,
                     placeholder: this.options.placeholder
@@ -32,11 +33,13 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
 
                 this.userMessage_ = create('span', {
                     className: 'user-message'
-                }));
+                })
+            );
 
             return this;
         },
 
+        // Throttle the searches to prevent too many requests
         search: _.throttle(function (e) {
 
             this.model.get(this.textInput_.value, _.bind(function (cities) {
@@ -53,14 +56,17 @@ define("views/CitySearch", ['models/CitySearch'], function (CitySearchModel) {
 
         }, 100),
 
-        onFocus: function(){
+        // Empty on focus
+        onFocus: function () {
             this.textInput_.value = '';
         },
 
-        onBlur: function(){
+        // Fill on blur if we did have a previous value
+        onBlur: function () {
             this.textInput_.value = this.lastValue_;
         },
 
+        // Select the text and trigger change event
         select: function (e) {
             var el = e.target;
 

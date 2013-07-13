@@ -113,6 +113,7 @@
     "predef"        : [         // Extra globals.
         "_",
         "O",
+        "$",
         "console",
         "define",
         "require",

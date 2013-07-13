@@ -1,3 +1,7 @@
+/**
+ * A result list view, it caches previously rendred views and reuses them when needed
+ */
+
 define("views/ResultList", [
     'views/FlightResult'
 ], function (FlightResultView) {

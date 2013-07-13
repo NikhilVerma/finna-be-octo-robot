@@ -1,0 +1,54 @@
+/**
+ * Styles for the city search text input and auto complete box
+ */
+
+.city-search {
+    position: relative;
+    margin: 0 0 @default-padding 0;
+
+    ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    li {
+        padding: 0.5em;
+        border-bottom: 1px solid @lighter-border-color;
+        list-style: none;
+        text-align: center;
+
+        &:hover {
+            background: @background-dark;
+        }
+    }
+
+    .user-message {
+        .bold-font;
+        .transition(height 250ms ease-in-out);
+        display: block;
+        overflow: hidden;
+        height: 0;
+        color: @medium-text-color;
+        color: @base-green;
+        text-align: center;
+        font-size: 0.8em;
+        line-height: 1em;
+
+        &.show {
+            padding: @default-padding / 2 0;
+            height: 1em;
+        }
+    }
+
+    input {
+        .box-sizing(border-box);
+        width: 100%;
+        text-align: center;
+    }
+}

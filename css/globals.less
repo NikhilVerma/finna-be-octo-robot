@@ -4,7 +4,6 @@
 *****************************************************************************************/
 
 // sizes
-@main-header-height: 48px;
 @default-padding: 10px;
 
 // colors
@@ -14,42 +13,32 @@
 @dark-text-color: #333;
     // background
 @background-color: rgb(240,241,242);
-@background-light: #fff;
 @background-dark: darken(@background-color, 5);
     // border
 @medium-border-color: #c6c6c6;
 @light-border-color: rgb(234,235,238);
 @lighter-border-color: #e5e5e5;
     // others
-@android-blue: #33b5e5;
 @base-green: #18C018;
 
-// list view
-@list-view-title-text-shadow-color: white;
-@list-view-title-text-color: rgb(102, 102, 102);
-@list-view-item-background-color: white;
-@list-view-item-seperator-color: @lighter-border-color;
-@list-view-item-border-color: #c4c4c4;
-@list-view-item-top-box-shadow-color: rgba(0,0,0,0.1);
-@list-view-item-bottom-box-shadow-color: rgba(255,255,255,0.5);
-@list-view-item-selected-background-color: #e2e2e2;
+// Response variables
+@mobile-breakpoint: 400px;
 
 // Fonts
-
 @font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+  font-family: 'Droid Sans';
   src: local('Droid Sans'), local('DroidSans'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
 }
 
 @font-face {
-  font-family: 'Droid Sans Bold';
-  font-style: normal;
   font-weight: 700;
+  font-style: normal;
+  font-family: 'Droid Sans Bold';
   src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/EFpQQyG9GqCrobXxL-KRMQFhaRv2pGgT5Kf0An0s4MM.woff) format('woff');
 }
-å
+
 strong, .bold-font {
     font-family: 'Droid Sans Bold', sans-serif;
 }
@@ -63,8 +52,8 @@ input:focus {
 }
 
 body {
-    max-width: 700px;
     margin: 0 auto;
+    max-width: 700px;
     background: @background-color;
     color: #222;
     font-size: 100%;
@@ -72,11 +61,10 @@ body {
 }
 
 @base-header-dist: 1.2px;
-
 header {
     .bold-font;
-    text-align: center;
     color: #fff;
+    text-align: center;
     text-shadow: 0 @base-header-dist      darken(@background-color, 10),
                  0 @base-header-dist * 2  darken(@background-color, 5),
                  0 @base-header-dist * 3  darken(@background-color, 10),
@@ -92,20 +80,20 @@ h1 {
 }
 
 span.placeholder {
+    .bold-font;
     display: block;
     color: @medium-text-color;
-    .bold-font;
     font-size: 0.8em;
     line-height: 1em;
 }
 
 input[type=text] {
-    border: 0;
-    line-height: 1.5em;
-    height: 1.5em;
-    padding: 0 0.5em;
     .box-sizing(border-box);
     .box-shadow(0 0 2px 1px #ddd);
+    padding: 0 0.5em;
+    height: 1.5em;
+    border: 0;
+    line-height: 1.5em;
 }
 
 .green-button {

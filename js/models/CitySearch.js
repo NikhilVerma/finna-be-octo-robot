@@ -4,6 +4,11 @@ define("models/CitySearch", [
     'use strict';
 
     return Backbone.Model.extend({
+        /**
+         * Performs a basic string search on the list of cities and returns matching cities
+         * @param  {String}   value    search term
+         * @param  {Function} callback Callback to call when values are found
+         */
         get: function (value, callback) {
             value = value.toLowerCase();
 
@@ -14,10 +19,6 @@ define("models/CitySearch", [
             callback.call(this, _.filter(offline.cityList, function (city) {
                 return city.name.toLowerCase().search(value) !== -1;
             }).slice(0, 5));
-        },
-
-        getAllCities: function (callback) {
-            callback.call(this, offline.cityList);
         }
     });
 

@@ -22,8 +22,6 @@ define("core/DOM", function () {
                             el.className = attrs[key];
                         } else if (key === 'text') {
                             el.textContent = attrs[key];
-                        } else if (key === 'for') {
-                            el.htmlFor = attrs[key];
                         } else if (key === 'html') {
                             el.innerHTML = attrs[key];
                         } else if (key !== 'content') {

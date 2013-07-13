@@ -1,0 +1,51 @@
+/**
+ * Styles for the range slider
+ */
+
+.price-slider {
+
+    width: 50%;
+    float: right;
+
+    @media (max-width: @mobile-breakpoint) {
+        width: 100%;
+        float: none;
+    }
+
+    .placeholder {
+        margin: 0 0 @default-padding 0;
+        text-align: center;
+    }
+
+    .slider {
+        .Vertical-gradient-two-colors(#e3e3e3, 0%, #ffffff, 100%);
+        position: relative;
+        height: 0.4em;
+        border: 1px solid #c9c9c9;
+        border-radius: 0.5em;
+
+        .range {
+            .Vertical-gradient-three-colors(#509c21, 0%, #53a31c, 50%, #3d7f0d, 100%);
+            position: absolute;
+            top: -1px;
+            left: 0;
+            height: 0.4em;
+            border: 1px solid #2d6107;
+            border-radius: 0.5em;
+        }
+
+        span {
+            .Vertical-gradient-two-colors(rgb(107,203,44), 0%, rgb(77,151,3), 100%);
+            border: 1px solid rgb(77,151,3);
+            .box-shadow(0 0 5px #fff);
+            .border-radius(20px);
+            position: absolute;
+            top: 50%;
+            left: 0px;
+            margin-top: -10px;
+            margin-left: -10px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

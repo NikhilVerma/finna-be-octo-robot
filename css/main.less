@@ -1,79 +1,13 @@
 @import "normalize.less";
 @import "globals.less";
 @import "mixins.less";
+@import "kalendae.less";
 @import "flight-result.less";
 @import "people-select.less";
-@import "kalendae.less";
-
-
-.city-search {
-    font-size: 80%;
-    margin: 0 0 @default-padding 0;
-    position: relative;
-
-    ul {
-        margin: 0;
-        padding: 0;
-        background: white;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        z-index: 1;
-    }
-
-    li {
-        list-style: none;
-        padding: 0.5em;
-        border-bottom: 1px solid @lighter-border-color;
-
-        &:hover {
-            background: @background-dark;
-        }
-    }
-
-    .user-message {
-        .bold-font;
-        font-size: 0.8em;
-        line-height: 1em;
-        .transition(height 250ms ease-in-out);
-        display: block;
-        height: 0;
-        overflow: hidden;
-        color: @medium-text-color;
-        text-align: right;
-        color: @base-green;
-
-        &.show {
-            height: 1em;
-            padding-top: @default-padding;
-        }
-    }
-
-    input {
-        width: 100%;
-        .box-sizing(border-box);
-    }
-}
-
-.flight-search {
-    .box-sizing(border-box);
-    padding: @default-padding 0;
-    width: 100%;
-
-    .city-search {
-        width: 48%;
-        margin-left: 1%;
-        margin-right: 1%;
-        display: inline-block;
-        vertical-align: top;
-    }
-}
+@import "price-slider.less";
+@import "city-search.less";
+@import "flight-search.less";
 
 .date-select {
     text-align: center;
-
-    .kalendae {
-
-    }
 }

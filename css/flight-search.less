@@ -1,0 +1,42 @@
+/**
+ * Styles for the main flight search area
+ */
+
+.flight-search {
+    .box-sizing(border-box);
+    clear: both;
+    overflow: hidden;
+    padding: @default-padding 0;
+    width: 100%;
+
+    // Disable text selection
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+
+
+    @media (max-width: @mobile-breakpoint) {
+        padding: @default-padding;
+
+        > * {
+            margin: 0 0 @default-padding 0 ;
+        }
+    }
+
+    .city-search {
+        display: inline-block;
+        margin-right: 1%;
+        margin-left: 1%;
+        width: 48%;
+        vertical-align: top;
+        font-size: 80%;
+
+        @media (max-width: @mobile-breakpoint) {
+            float: none;
+            width: 100%;
+        }
+    }
+}

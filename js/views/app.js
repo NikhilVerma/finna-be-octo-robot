@@ -8,8 +8,6 @@ define("views/app", [
     var View = Backbone.View.extend({
         className: 'app',
 
-        flightView_: null,
-
         update: function (body) {
 
             // Header view

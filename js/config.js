@@ -6,20 +6,6 @@ require.config({
     // generated configuration file.
     deps: ["kalendae", "moment", "backbone", "main"],
 
-    // paths: {
-    //     // Use the underscore build of Lo-Dash to minimize incompatibilities.
-    //     "lodash": "../vendor/jam/lodash/dist/lodash.underscore"
-
-    //     // Put additional paths here.
-    // },
-
-    // map: {
-    //     // Ensure Lo-Dash is used instead of underscore.
-    //     "*": {
-    //         "underscore": "lodash"
-    //     }
-    // },
-
     "packages": [{
         "name": "backbone",
         "location": "/js/libs",
